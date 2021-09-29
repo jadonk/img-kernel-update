@@ -1,2 +1,3 @@
 #!/bin/sh
-fdisk -l 121202-BBB.img
+FILE=121202-BBB.img
+fdisk -l $FILE
