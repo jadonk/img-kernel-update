@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# Run flasher.sh
+#
+
+case "$1" in
+  start|restart)
+ 	echo "Running /usr/sbin/flasher.sh..."
+	[ -e /usr/sbin/flasher.sh ] && . /usr/sbin/flasher.sh
+	;;
+  *)
+	echo "Usage: $0 {start}"
+	exit 1
+esac
+
+exit $?

@@ -1,0 +1,1 @@
+source "$BR2_EXTERNAL_beaglebone_flasher_PATH/package/beaglebone_flasher/Config.in"
