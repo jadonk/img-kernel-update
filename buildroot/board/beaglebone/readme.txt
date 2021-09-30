@@ -1,4 +1,4 @@
-CircuitCo BeagleBone
+BeagleBoard.org BeagleBone
 Texas Instuments AM335x Evaluation Module (TMDXEVM3358)
 
 Description
