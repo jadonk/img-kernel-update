@@ -1,7 +1,7 @@
 #!/bin/bash -e
 # See also https://raw.githubusercontent.com/RobertCNelson/boot-scripts/master/tools/beaglebone-black-eMMC-flasher.sh
 
-# Write /run/flasher.img.xz to /dev/mmcblk1 and halt
+# Write /usr/share/beaglebone_flasher/flasher.img.xz to /dev/mmcblk1 and halt
 
 cylon_leds () {
 	if [ -e /sys/class/leds/beaglebone\:green\:usr0/trigger ] ; then
@@ -48,8 +48,8 @@ cylon_leds () {
 	fi
 }
 
-perform_dd () {
-	xzcat /run/flasher.img.xz | dd of=/dev/mmcblk1
+perform_flash_dd () {
+	xzcat /usr/share/beaglebone_flasher/flasher.img.xz | dd of=/dev/mmcblk1
 	sync
 
 	[ -e /proc/$CYLON_PID ]  && kill $CYLON_PID
@@ -66,4 +66,4 @@ perform_dd () {
 }
 
 cylon_leds & CYLON_PID=$!
-perform_dd
+perform_flash_dd
