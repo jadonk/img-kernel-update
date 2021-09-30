@@ -1,4 +1,5 @@
 config BR2_PACKAGE_BEAGLEBONE_FLASHER
 	bool "beaglebone_flasher"
+	depends on BR2_PACKAGE_XZ
 	help
 		Write /run/flasher.img.xz to eMMC on BeagleBone at boot
