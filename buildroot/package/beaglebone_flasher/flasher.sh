@@ -4,8 +4,17 @@
 # Write /usr/share/beaglebone_flasher/flasher.img.xz to /dev/mmcblk1 and halt
 
 cylon_leds () {
-	if [ -e /sys/class/leds/beaglebone\:green\:usr0/trigger ] ; then
-		BASE=/sys/class/leds/beaglebone\:green\:usr
+	BASE=/sys/class/leds/beaglebone\:green\:usr
+
+	if [ ! -e ${BASE}0/trigger ] ; then
+		modprobe -a leds-gpio
+		modprobe -a ledstrig-heartbeat
+		modprobe -a ledstrig-default-on
+		modprobe -a ledstrig-timer
+		modprobe -a ledstrig-gpio
+	fi
+
+	if [ -e ${BASE}0/trigger ] ; then
 		echo none > ${BASE}0/trigger
 		echo none > ${BASE}1/trigger
 		echo none > ${BASE}2/trigger
@@ -49,7 +58,7 @@ cylon_leds () {
 }
 
 perform_flash_dd () {
-	xzcat /usr/share/beaglebone_flasher/flasher.img.xz | dd of=/dev/mmcblk1
+	xzcat /usr/share/beaglebone_flasher/flasher.img.xz | dd of=/dev/mmcblk1 bs=32M
 	sync
 
 	[ -e /proc/$CYLON_PID ]  && kill $CYLON_PID
