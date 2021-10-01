@@ -46,6 +46,7 @@ cylon_leds () {
 			6)	echo 255 > ${BASE}1/brightness
 				echo 0   > ${BASE}2/brightness
 				STATE=1
+				killall -SIGUSR1 dd
 				;;
 			*)	echo 255 > ${BASE}0/brightness
 				echo 0   > ${BASE}1/brightness
